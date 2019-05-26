@@ -30,10 +30,15 @@ namespace CalcGUI
         static string ope = null;
         static decimal result = 0;
         static decimal d = 0;
+        static string Ans = null;
         public void button0_Click(object sender, RoutedEventArgs e)
         {
             inKey = "0";
-            if (decimal.TryParse(formula.Text, out d))
+            if (formula.Text.EndsWith("."))
+            {
+                formula.Text = formula.Text + inKey;
+            }
+            else if (decimal.TryParse(formula.Text, out d))
             {
                 formula.Text = (System.Convert.ToDecimal(formula.Text) * 10 + System.Convert.ToDecimal(inKey)).ToString();
             }
@@ -46,7 +51,11 @@ namespace CalcGUI
         public void button1_Click(object sender, RoutedEventArgs e)
         {
             inKey = "1";
-            if (decimal.TryParse(formula.Text, out d))
+            if (formula.Text.EndsWith("."))
+            {
+                formula.Text = formula.Text + inKey;
+            }
+            else if (decimal.TryParse(formula.Text, out d))
             {
                 formula.Text = (System.Convert.ToDecimal(formula.Text) * 10 + System.Convert.ToDecimal(inKey)).ToString();
             }
@@ -59,7 +68,11 @@ namespace CalcGUI
         public void button2_Click(object sender, RoutedEventArgs e)
         {
             inKey = "2";
-            if (decimal.TryParse(formula.Text, out d))
+            if (formula.Text.EndsWith("."))
+            {
+                formula.Text = formula.Text + inKey;
+            }
+            else if (decimal.TryParse(formula.Text, out d))
             {
                 formula.Text = (System.Convert.ToDecimal(formula.Text) * 10 + System.Convert.ToDecimal(inKey)).ToString();
             }
@@ -72,7 +85,11 @@ namespace CalcGUI
         public void button3_Click(object sender, RoutedEventArgs e)
         {
             inKey = "3";
-            if (decimal.TryParse(formula.Text, out d))
+            if (formula.Text.EndsWith("."))
+            {
+                formula.Text = formula.Text + inKey;
+            }
+            else if (decimal.TryParse(formula.Text, out d))
             {
                 formula.Text = (System.Convert.ToDecimal(formula.Text) * 10 + System.Convert.ToDecimal(inKey)).ToString();
             }
@@ -85,7 +102,11 @@ namespace CalcGUI
         public void button4_Click(object sender, RoutedEventArgs e)
         {
             inKey = "4";
-            if (decimal.TryParse(formula.Text, out d))
+            if (formula.Text.EndsWith("."))
+            {
+                formula.Text = formula.Text + inKey;
+            }
+            else if (decimal.TryParse(formula.Text, out d))
             {
                 formula.Text = (System.Convert.ToDecimal(formula.Text) * 10 + System.Convert.ToDecimal(inKey)).ToString();
             }
@@ -98,7 +119,11 @@ namespace CalcGUI
         public void button5_Click(object sender, RoutedEventArgs e)
         {
             inKey = "5";
-            if (decimal.TryParse(formula.Text, out d))
+            if (formula.Text.EndsWith("."))
+            {
+                formula.Text = formula.Text + inKey;
+            }
+            else if (decimal.TryParse(formula.Text, out d))
             {
                 formula.Text = (System.Convert.ToDecimal(formula.Text) * 10 + System.Convert.ToDecimal(inKey)).ToString();
             }
@@ -111,7 +136,11 @@ namespace CalcGUI
         public void button6_Click(object sender, RoutedEventArgs e)
         {
             inKey = "6";
-            if (decimal.TryParse(formula.Text, out d))
+            if (formula.Text.EndsWith("."))
+            {
+                formula.Text = formula.Text + inKey;
+            }
+            else if (decimal.TryParse(formula.Text, out d))
             {
                 formula.Text = (System.Convert.ToDecimal(formula.Text) * 10 + System.Convert.ToDecimal(inKey)).ToString();
             }
@@ -124,7 +153,11 @@ namespace CalcGUI
         public void button7_Click(object sender, RoutedEventArgs e)
         {
             inKey = "7";
-            if (decimal.TryParse(formula.Text, out d))
+            if (formula.Text.EndsWith("."))
+            {
+                formula.Text = formula.Text + inKey;
+            }
+            else if (decimal.TryParse(formula.Text, out d))
             {
                 formula.Text = (System.Convert.ToDecimal(formula.Text) * 10 + System.Convert.ToDecimal(inKey)).ToString();
             }
@@ -137,7 +170,11 @@ namespace CalcGUI
         public void button8_Click(object sender, RoutedEventArgs e)
         {
             inKey = "8";
-            if (decimal.TryParse(formula.Text, out d))
+            if (formula.Text.EndsWith("."))
+            {
+                formula.Text = formula.Text + inKey;
+            }
+            else if (decimal.TryParse(formula.Text, out d))
             {
                 formula.Text = (System.Convert.ToDecimal(formula.Text) * 10 + System.Convert.ToDecimal(inKey)).ToString();
             }
@@ -150,7 +187,11 @@ namespace CalcGUI
         public void button9_Click(object sender, RoutedEventArgs e)
         {
             inKey = "9";
-            if (decimal.TryParse(formula.Text, out d))
+            if (formula.Text.EndsWith("."))
+            {
+                formula.Text = formula.Text + inKey;
+            }
+            else if (decimal.TryParse(formula.Text, out d))
             {
                 formula.Text = (System.Convert.ToDecimal(formula.Text) * 10 + System.Convert.ToDecimal(inKey)).ToString();
             }
@@ -262,10 +303,48 @@ namespace CalcGUI
             {
                 num = System.Convert.ToDecimal(formula.Text);
                 Calc();
-                formula.Text = ope;
+                formula.Text = System.Convert.ToString(result);
                 Clear();
+                Ans = formula.Text;
             }
         }
+
+        public void buttonDP_Click(object sender, RoutedEventArgs e)
+        {
+            inKey = ".";
+            if (decimal.TryParse(formula.Text, out d))
+            {
+                formula.Text = formula.Text + inKey;
+            }
+            else
+            {
+                formula.Text = "0";
+            }
+        }
+        public void buttonF_Click(object sender, RoutedEventArgs e)
+        {
+            inKey = "^";
+            if (formula.Text == FailMessage)
+            {
+                formula.Text = "0";
+            }
+            else if (ope == null)
+            {
+                result = System.Convert.ToDecimal(formula.Text);
+                ope = inKey;
+                formula.Text = inKey;
+            }
+        }
+
+        public void buttonAns_Click(object sender, RoutedEventArgs e)//Recall of previous calculation result
+        {
+            inKey = "Ans";
+            if(!decimal.TryParse(formula.Text, out d))
+            {
+                formula.Text = Ans;
+            }
+        }
+
         public static void Calc()
         {
             switch (ope)
@@ -293,8 +372,6 @@ namespace CalcGUI
                     result = Powd(result, num);
                     break;
             }
-            
-                ope=result.ToString();
             
         }
         public static void Clear()
